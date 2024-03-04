@@ -1,7 +1,9 @@
 name: 'Get Image Layer Size Difference'
 description: 'Compare Docker image layer sizes between two releases to determine pull size differences.'
 author: 'Furkan Tasbasi'
-
+branding:
+  icon: check-square
+  color: blue
 inputs:
   REPO_LIST:
     description: 'A space-separated list of repositories to compare.'
