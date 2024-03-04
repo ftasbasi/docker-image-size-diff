@@ -14,11 +14,6 @@ inputs:
   NEW_RELEASE:
     description: 'The new release/version to compare.'
     required: true
-
-outputs:
-  difference:
-    description: 'The size difference between old and new releases.'
-
 runs:
-  using: 'bash'
-  main: 'entrypoint.sh'
+  using: 'node20'
+  main: 'index.js'
