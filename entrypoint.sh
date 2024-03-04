@@ -2,9 +2,15 @@
 
 set -e
 
+# ANSI color codes
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
 # Check if the org_repo value is provided, otherwise set a default value
 if [ -z "$ORG_REPO" ]; then
-  echo "Error: ORG_REPO input is required."
+  echo -e "${RED}Error: ORG_REPO input is required.${NC}"
   exit 1
 fi
 
@@ -17,12 +23,12 @@ do
 
     # Don't perform this operation against lazy built manifests
     if [ $(wc -l < "old_layers.txt") -eq 1 ]; then
-        echo "old_layers.txt manifest contains no layers, skipping image"
+        echo -e "${YELLOW}${repo}: old_layers.txt manifest contains no layers, skipping image${NC}"
         continue
     fi
 
     if [ $(wc -l < "new_layers.txt") -eq 1 ]; then
-        echo "new_layers.txt manifest contains no layers, skipping image"
+        echo -e "${YELLOW}${repo}: new_layers.txt manifest contains no layers, skipping image${NC}"
         continue
     fi
 
@@ -34,7 +40,7 @@ do
     NEW_DIGESTS=$(grep -v -x -f old_image_digests.txt new_image_digests.txt | paste -sd, - | sed 's/"/\"/g')
 
     # Get the sizes of all digests that we filtered and convert to megabytes
-    echo "${repo}:"
-    jq "[.[] | select( .digest | IN($NEW_DIGESTS)) | .size] | add | tonumber/1048576" new_layers.txt | { bc | tr -d '\n' ; echo " MB"; }
+    echo -e "${GREEN}${repo}:${NC}"
+    jq "[.[] | select( .digest | IN($NEW_DIGESTS)) | .size] | add | tonumber/1048576" new_layers.txt | { bc | tr -d '\n' ; echo -e "${NC} MB"; }
     echo
 done
