@@ -9,13 +9,21 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Input parameters
-REPO_LIST="${1}"
-LAST_RELEASE="${2}"
-NEW_RELEASE="${3}"
+REPO_LIST="${REPO_LIST}"
+OLD_RELEASE="${OLD_RELEASE}"
+NEW_RELEASE="${NEW_RELEASE}"
 
-# Check if the repo_list value is provided, otherwise set a default value
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 3 ]; then
+  echo -e "${RED}Error: Three arguments are required.${NC}"
+  echo "Usage: $0 <REPO_LIST> <OLD_RELEASE> <NEW_RELEASE>"
+  exit 1
+fi
+
+# Check if the REPO_LIST value is provided
 if [ -z "$REPO_LIST" ]; then
   echo -e "${RED}Error: REPO_LIST input is required.${NC}"
+  echo "Usage: $0 <REPO_LIST> <OLD_RELEASE> <NEW_RELEASE>"
   exit 1
 fi
 
@@ -23,7 +31,7 @@ for repo in $REPO_LIST
 do
     # Obtain image layers data from Docker Hub and store locally.
     # Immediately pipe to jq as it handles empty results more gracefully
-    docker manifest inspect $repo:$LAST_RELEASE | yq -r '.' | jq '.layers' > old_layers.txt
+    docker manifest inspect $repo:$OLD_RELEASE | yq -r '.' | jq '.layers' > old_layers.txt
     docker manifest inspect $repo:$NEW_RELEASE | yq -r '.' | jq '.layers' > new_layers.txt
 
     # Don't perform this operation against lazy built manifests

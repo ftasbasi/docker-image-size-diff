@@ -1,25 +1,26 @@
 name: 'Get Image Layer Size Difference'
 description: 'Compare Docker image layer sizes between two releases to determine pull size differences.'
+author: 'Furkan Tasbasi'
 
 inputs:
   REPO_LIST:
     description: 'A space-separated list of repositories to compare.'
     required: true
-  LAST_RELEASE:
-    description: 'The last release/version to compare.'
+  OLD_RELEASE:
+    description: 'The old release/version to compare.'
     required: true
   NEW_RELEASE:
     description: 'The new release/version to compare.'
     required: true
 
+outputs:
+  difference:
+    description: 'The size difference between old and new releases.'
+
 runs:
-  using: 'composite'
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build Docker image
-      run: docker build . --file Dockerfile --tag ftasbasi-docker-img-size-diff:${{ github.sha }}
-
-    - name: Run Docker image
-      run: docker run ftasbasi-docker-img-size-diff:${{ github.sha }} ${{ inputs.REPO_LIST }} ${{ inputs.LAST_RELEASE }} ${{ inputs.NEW_RELEASE }}
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.REPO_LIST }}
+    - ${{ inputs.OLD_RELEASE }}
+    - ${{ inputs.NEW_RELEASE }}
