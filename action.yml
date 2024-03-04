@@ -5,13 +5,13 @@ branding:
   icon: anchor
   color: blue
 inputs:
-  repo_list:
+  repo-list:
     description: 'A space-separated list of repositories to compare.'
     required: true
-  old_version:
+  old-version:
     description: 'The old release/version to compare.'
     required: true
-  new_version:
+  new-version:
     description: 'The new release/version to compare.'
     required: true
 runs:

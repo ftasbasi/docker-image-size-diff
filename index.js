@@ -31,9 +31,17 @@ const compareImageLayers = (repoList, oldRelease, newRelease) => {
 
 // Entry point function
 const run = (repoList, oldRelease, newRelease) => {
-    // Check if the REPO_LIST value is provided
+    // Check if the repo-list value is provided
     if (!repoList) {
-        console.error('Error: REPO_LIST input is required.');
+        console.error('Error: repo-list input is required.');
+        process.exit(1);
+    }
+    if (!oldRelease) {
+        console.error('Error: old-version input is required.');
+        process.exit(1);
+    }
+    if (!newRelease) {
+        console.error('Error: new-version input is required.');
         process.exit(1);
     }
 
@@ -45,9 +53,9 @@ const run = (repoList, oldRelease, newRelease) => {
 };
 
 // Extract command line arguments
-const repoList = core.getInput('repo_list');
-const oldRelease = core.getInput('old_version');
-const newRelease = core.getInput('new_version');
+const repoList = core.getInput('repo-list');
+const oldRelease = core.getInput('old-version');
+const newRelease = core.getInput('new-version');
 
 
 // Run the action with command-line arguments

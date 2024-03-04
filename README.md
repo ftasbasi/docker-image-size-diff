@@ -4,7 +4,7 @@ This GitHub Action compares Docker image layer sizes between two releases to det
 
 ## Inputs
 
-- `REPO_LIST`: (Required) A list of repositories to compare.
+- `repo-list`: (Required) A list of repositories to compare.
 - `OLD_RELEASE`: (Required) The last release to compare.
 - `NEW_RELEASE`: (Required) The new release to compare.
 
@@ -13,6 +13,6 @@ This GitHub Action compares Docker image layer sizes between two releases to det
 ```yaml
 uses: ftasbasi/docker-image-size-diff@<tag>
 with:
-  REPO_LIST: 'repository1 repository2'
+  repo-list: 'repository1 repository2'
   OLD_RELEASE: 'v1.0'
   NEW_RELEASE: 'v1.1'
