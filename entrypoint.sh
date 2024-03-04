@@ -8,9 +8,14 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if the org_repo value is provided, otherwise set a default value
-if [ -z "$ORG_REPO" ]; then
-  echo -e "${RED}Error: ORG_REPO input is required.${NC}"
+# Input parameters
+REPO_LIST="${REPO_LIST}"
+LAST_RELEASE="${LAST_RELEASE}"
+NEW_RELEASE="${NEW_RELEASE}"
+
+# Check if the repo_list value is provided, otherwise set a default value
+if [ -z "$REPO_LIST" ]; then
+  echo -e "${RED}Error: REPO_LIST input is required.${NC}"
   exit 1
 fi
 
@@ -18,8 +23,8 @@ for repo in $REPO_LIST
 do
     # Obtain image layers data from Docker Hub and store locally.
     # Immediately pipe to jq as it handles empty results more gracefully
-    docker manifest inspect $ORG_REPO:$LAST_RELEASE | yq -r '.' | jq '.layers' > old_layers.txt
-    docker manifest inspect $ORG_REPO:$NEW_RELEASE | yq -r '.' | jq '.layers' > new_layers.txt
+    docker manifest inspect $repo:$LAST_RELEASE | yq -r '.' | jq '.layers' > old_layers.txt
+    docker manifest inspect $repo:$NEW_RELEASE | yq -r '.' | jq '.layers' > new_layers.txt
 
     # Don't perform this operation against lazy built manifests
     if [ $(wc -l < "old_layers.txt") -eq 1 ]; then
