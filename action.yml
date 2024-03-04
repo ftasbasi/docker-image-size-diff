@@ -20,9 +20,5 @@ outputs:
     description: 'The size difference between old and new releases.'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.REPO_LIST }}
-    - ${{ inputs.OLD_RELEASE }}
-    - ${{ inputs.NEW_RELEASE }}
+  using: 'bash'
+  main: 'entrypoint.sh'

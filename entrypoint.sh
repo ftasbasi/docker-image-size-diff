@@ -1,7 +1,12 @@
 #!/bin/bash
 
 set -e
-
+# Install necessary packages
+apk add --no-cache \
+    bash \
+    jq \
+    yq \
+    docker-cli
 # ANSI color codes
 GREEN='\033[0;32m'
 RED='\033[0;31m'
