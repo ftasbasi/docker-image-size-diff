@@ -11,7 +11,7 @@ This GitHub Action compares Docker image layer sizes between two releases to det
 ## Example Usage
 
 ```yaml
-uses: <username>/<action-repo>@<tag>
+uses: ftasbasi/docker-image-size-diff@<tag>
 with:
   REPO_LIST: 'repository1 repository2'
   LAST_RELEASE: 'v1.0'
