@@ -5,19 +5,15 @@ branding:
   icon: anchor
   color: blue
 inputs:
-  REPO_LIST:
+  repo_list:
     description: 'A space-separated list of repositories to compare.'
     required: true
-  OLD_RELEASE:
+  old_version:
     description: 'The old release/version to compare.'
     required: true
-  NEW_RELEASE:
+  new_version:
     description: 'The new release/version to compare.'
     required: true
 runs:
   using: 'node20'
   main: 'index.js'
-  args:
-    - ${{ inputs.REPO_LIST }}
-    - ${{ inputs.OLD_RELEASE }}
-    - ${{ inputs.NEW_RELEASE }}

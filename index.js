@@ -1,4 +1,5 @@
 const { execSync } = require('child_process');
+const core = require('@actions/core');
 
 // Function to install necessary packages
 const installPackages = () => {
@@ -44,7 +45,10 @@ const run = (repoList, oldRelease, newRelease) => {
 };
 
 // Extract command line arguments
-const [repoList, oldRelease, newRelease] = process.argv.slice(2);
+const repoList = core.getInput('repo_list');
+const oldRelease = core.getInput('old_version');
+const newRelease = core.getInput('new_version');
+
 
 // Run the action with command-line arguments
 run(repoList, oldRelease, newRelease);
