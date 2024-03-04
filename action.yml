@@ -2,7 +2,7 @@ name: 'Get Image Layer Size Difference'
 description: 'Compare Docker image layer sizes between two releases to determine pull size differences.'
 author: 'Furkan Tasbasi'
 branding:
-  icon: check-square
+  icon: anchor
   color: blue
 inputs:
   REPO_LIST:
@@ -17,8 +17,7 @@ inputs:
 runs:
   using: 'node20'
   main: 'index.js'
-  env:
-    REPO_LIST: ${{ inputs.REPO_LIST }}
-    OLD_RELEASE: ${{ inputs.OLD_RELEASE }}
-    NEW_RELEASE: ${{ inputs.NEW_RELEASE }}
-
+  args:
+    - ${{ inputs.REPO_LIST }}
+    - ${{ inputs.OLD_RELEASE }}
+    - ${{ inputs.NEW_RELEASE }}

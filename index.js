@@ -29,11 +29,7 @@ const compareImageLayers = (repoList, oldRelease, newRelease) => {
 };
 
 // Entry point function
-const run = () => {
-    const repoList = process.env.REPO_LIST;
-    const oldRelease = process.env.OLD_RELEASE;
-    const newRelease = process.env.NEW_RELEASE;
-
+const run = (repoList, oldRelease, newRelease) => {
     // Check if the REPO_LIST value is provided
     if (!repoList) {
         console.error('Error: REPO_LIST input is required.');
@@ -47,5 +43,8 @@ const run = () => {
     compareImageLayers(repoList, oldRelease, newRelease);
 };
 
-// Run the action
-run();
+// Extract command line arguments
+const [repoList, oldRelease, newRelease] = process.argv.slice(2);
+
+// Run the action with command-line arguments
+run(repoList, oldRelease, newRelease);
