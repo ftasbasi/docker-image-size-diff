@@ -1,0 +1,14 @@
+name: 'Get Image Layer Size Difference'
+description: 'Get the pull size when using the last release as a base'
+inputs:
+  REPO_LIST:
+    required: true
+  LAST_RELEASE:
+    required: true
+  NEW_RELEASE:
+    required: true
+  ORG_REPO:
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
