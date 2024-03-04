@@ -1,6 +1,7 @@
 {
-  "name": "renderfile",
+  "name": "docker-image-size-diff",
   "version": "1.0.0",
+  "description": "This GitHub Action compares Docker image layer sizes between two releases to determine pull size differences effortlessly.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@actions/github": "^6.0.0"
-  },
-  "devDependencies": {},
-  "description": ""
+    "child_process": "^1.0.2"
+  }
 }
