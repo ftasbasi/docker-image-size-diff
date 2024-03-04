@@ -17,3 +17,8 @@ inputs:
 runs:
   using: 'node20'
   main: 'index.js'
+  with:
+    REPO_LIST: ${{ inputs.REPO_LIST }}
+    OLD_RELEASE: ${{ inputs.OLD_RELEASE }}
+    NEW_RELEASE: ${{ inputs.NEW_RELEASE }}
+
