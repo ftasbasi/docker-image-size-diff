@@ -9,9 +9,9 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Input parameters
-REPO_LIST="${REPO_LIST}"
-LAST_RELEASE="${LAST_RELEASE}"
-NEW_RELEASE="${NEW_RELEASE}"
+REPO_LIST="${1}"
+LAST_RELEASE="${2}"
+NEW_RELEASE="${3}"
 
 # Check if the repo_list value is provided, otherwise set a default value
 if [ -z "$REPO_LIST" ]; then
