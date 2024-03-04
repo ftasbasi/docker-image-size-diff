@@ -4,8 +4,8 @@ const core = require('@actions/core');
 // Function to install necessary packages
 const installPackages = () => {
     try {
-        execSync('apt-get update');
-        execSync('apt-get install -y bash jq yq docker-cli');
+        execSync('sudo apt-get update');
+        execSync('sudo apt-get install -y bash jq yq docker-cli');
     } catch (error) {
         console.error('Error installing packages:', error.message);
         process.exit(1);
